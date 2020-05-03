@@ -17,7 +17,7 @@
 [Report-Image]: https://goreportcard.com/report/github.com/bigmikes/cspf
 
 ## Introduction
-This package implements the [Constrained Shortest Path First](https://en.wikipedia.org/wiki/Constrained_Shortest_Path_First) algorithm with a generic tag system and condition-matching engine powered by [gval](github.com/PaesslerAG/gval).
+This package implements the [Constrained Shortest Path First](https://en.wikipedia.org/wiki/Constrained_Shortest_Path_First) algorithm with a generic tag system and condition-matching engine powered by [gval](https://github.com/PaesslerAG/gval).
 
 ## CSPF theory abridged
 Let's assume we have the following graph, consisting of 5 vertices and edges belonging to two different categories: _red_ and _blue_. With CSPF it is possible to find out what the shortest path that connects vertex _A_ to vertex _E_ and that includes only _red_ edges is.
@@ -77,7 +77,7 @@ fmt.Println(paths)
 ```
 
 ## Benchmarks and performance
-This package is in its early stages and there is room for improvements. Below benchmark's stats are the results of 20 repetitions with a fully-connected graph of 100 vertices. CSPF is much slower than normal SPF (Dijkstra) due to the additional complexity added by [gval](github.com/PaesslerAG/gval) to parse and evalaute the generic expressions.
+This package is in its early stages and there is room for improvements. Below benchmark's stats are the results of 20 repetitions with a fully-connected graph of 100 vertices. CSPF is much slower than normal SPF (Dijkstra) due to the additional complexity added by [gval](https://github.com/PaesslerAG/gval) to parse and evalaute the generic expressions.
 
 ```
 goos: darwin
