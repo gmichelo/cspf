@@ -41,7 +41,7 @@ type Tag struct {
 
 // Vertex represents a vertex of the graph.
 type Vertex struct {
-	// ID identifies uniquely a vertex inside
+	// ID uniquely identifies a vertex inside
 	// the graph.
 	ID string
 	//tags map[string]interface{} //TODO: implement constraints eval for vertex
@@ -49,9 +49,9 @@ type Vertex struct {
 
 // Edge represents a directed edge that connects
 // one vertex to another.
-// Edge must have a non-negative cost.
-// Edge can have a set of generic tags. Each tag must have
-// an unique key string. CSPF conditions apply on these tags.
+// Edge must have a non-negative cost and  can have a
+// set of generic tags. Each tag must have a unique
+// key string. CSPF conditions apply on these tags.
 type Edge struct {
 	// Source vertex of this edge.
 	From Vertex
@@ -60,7 +60,7 @@ type Edge struct {
 	// Numeric cost of this edge.
 	Cost uint64
 	// Set of generic key/value tags.
-	// Tag key is an unique string, whereas
+	// Tag key is a unique string, whereas
 	// the value can be of any type.
 	Tags map[string]interface{}
 }
@@ -199,7 +199,7 @@ func getSmallestDistanceVertex(unvisited map[Vertex]bool, distSet map[Vertex]uin
 }
 
 // CSPF runs the Constrained Shortest Path First algorithm
-// to perform find the shortest paths which edges all satisfy
+// to find the shortest paths whose edges all satisfy
 // the specified expression.
 // An edge cannot be part of the resulting graph if its tags
 // do not satisfy the specified expression.
@@ -232,7 +232,7 @@ func (g *Graph) edgeSatisfiesConstranints(e Edge) (bool, error) {
 
 // Paths lists all the possible paths of the graph that
 // connect from one vertex to the other.
-// Paths are listed through Depth-first search algorithm.
+// Paths are listed through Depth-First Search algorithm.
 func (g *Graph) Paths(from, to Vertex) (paths [][]Edge) {
 	if g == nil {
 		return
