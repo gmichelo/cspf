@@ -57,38 +57,43 @@ func ExampleGraph_SPF() {
 }
 
 func ExampleGraph_CSPF() {
-	// Create a graph with four vertices.
-	// A -> B -> D
-	// A -> C -> D
+	// Create a graph with five vertices.
+	// A -> B -> C -> E
+	// A -> D -> E
 	var graph cspf.Graph
 	a := cspf.Vertex{ID: "A"}
 	b := cspf.Vertex{ID: "B"}
 	c := cspf.Vertex{ID: "C"}
 	d := cspf.Vertex{ID: "D"}
+	e := cspf.Vertex{ID: "E"}
 
-	// Create a Tag
+	// Create red and blue tag
 	tagBlue := cspf.Tag{
 		Key:   "link",
 		Value: "blue",
 	}
+	tagRed := cspf.Tag{
+		Key:   "link",
+		Value: "red",
+	}
 
-	// Add the edges with a label
-	// to exclude one specific path
-	graph.AddEdge(a, b, 1, tagBlue)
-	graph.AddEdge(a, c, 2)
-	graph.AddEdge(b, d, 1)
-	graph.AddEdge(c, d, 1)
+	// Add the edges with labels
+	graph.AddEdge(a, b, 2, tagRed)
+	graph.AddEdge(b, c, 2, tagRed)
+	graph.AddEdge(c, e, 2, tagRed)
+	graph.AddEdge(a, d, 1, tagBlue)
+	graph.AddEdge(d, e, 1, tagBlue)
 
 	// Run the CSPF algorithm to
-	// derive the graph containing only
-	// the shortest paths (equal cost)
-	// from A to D.
-	cspfGraph, _ := graph.CSPF(a, d, `link != "blue"`)
+	// derive the graph containing
+	// the shortest path from A to E that
+	// includes only red edges.
+	cspfGraph, _ := graph.CSPF(a, d, `link == "red"`)
 
 	// List the path from vertex A
-	// to vertex D.
-	paths := cspfGraph.Paths(a, d)
+	// to vertex E.
+	paths := cspfGraph.Paths(a, e)
 
 	fmt.Println(paths)
-	// Output: [[{{A} {C} 2 map[]} {{C} {D} 1 map[]}]]
+	// Output: [[{{A} {B} 2 map[link:red]} {{B} {C} 2 map[link:red]} {{C} {E} 2 map[link:red]}]]
 }
